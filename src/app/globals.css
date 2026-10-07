@@ -1,18 +1,26 @@
 @import "tailwindcss";
 
 @theme {
-  --color-maroon: #6b1a2a;
-  --color-maroon-dark: #521421;
-  --color-gold: #d4b97a;
-  --color-cream: #f8f3ec;
-  --color-ink: #2b1a1d;
+  /* Burgundy: primary buttons, key headings, selected states. */
+  --color-maroon: #641f2a;
+  --color-maroon-dark: #4c1620;
+  /* Deep plum-brown for headings and dark panels. */
+  --color-espresso: #351f25;
+  /* Gold is an accent only (lines, icons, small details). Too light for text on cream. */
+  --color-gold: #c9a46a;
+  --color-gold-soft: #e4d0aa;
+  --color-cream: #f8f4ee;
+  --color-sand: #f1e8dd;
+  --color-ink: #2d2523;
+  --color-muted: #756b67;
 
-  --shadow-soft: 0 1px 2px rgb(43 26 29 / 0.04), 0 10px 30px -12px rgb(43 26 29 / 0.18);
+  --shadow-soft: 0 1px 2px rgb(53 31 37 / 0.04), 0 12px 32px -18px rgb(53 31 37 / 0.22);
+  --shadow-lift: 0 2px 4px rgb(53 31 37 / 0.04), 0 22px 44px -22px rgb(53 31 37 / 0.32);
 }
 
 @theme inline {
-  --font-heading: var(--font-cinzel), Georgia, serif;
-  --font-sans: var(--font-montserrat), system-ui, sans-serif;
+  --font-heading: var(--font-cormorant), Georgia, serif;
+  --font-sans: var(--font-jost), system-ui, sans-serif;
 }
 
 @layer base {
@@ -27,16 +35,22 @@
   }
   h1, h2, h3 {
     font-family: var(--font-heading);
-    color: var(--color-maroon);
-    letter-spacing: 0.02em;
+    font-weight: 500;
+    color: var(--color-espresso);
+    letter-spacing: -0.005em;
+    text-wrap: balance;
   }
   :focus-visible {
     outline: 2px solid var(--color-maroon);
-    outline-offset: 2px;
+    outline-offset: 3px;
+  }
+  ::selection {
+    background: var(--color-gold-soft);
+    color: var(--color-espresso);
   }
   dialog::backdrop {
-    background: rgb(43 26 29 / 0.6);
-    backdrop-filter: blur(2px);
+    background: rgb(53 31 37 / 0.55);
+    backdrop-filter: blur(3px);
   }
 }
 
@@ -44,9 +58,9 @@
   .kicker {
     font-family: var(--font-sans);
     text-transform: uppercase;
-    letter-spacing: 0.28em;
+    letter-spacing: 0.26em;
     font-size: 0.7rem;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--color-maroon);
   }
   .btn {
@@ -54,13 +68,14 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    min-height: 2.75rem;
-    padding: 0.625rem 1.25rem;
-    border-radius: 9999px;
-    font-weight: 600;
-    font-size: 0.875rem;
-    letter-spacing: 0.02em;
-    transition: background-color 150ms, color 150ms, border-color 150ms, transform 150ms;
+    min-height: 2.875rem;
+    padding: 0.7rem 1.5rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    transition: background-color 200ms, color 200ms, border-color 200ms, transform 200ms;
     text-align: center;
   }
   .btn:active {
@@ -74,33 +89,51 @@
     background: var(--color-maroon-dark);
   }
   .btn-secondary {
-    border: 1.5px solid var(--color-gold);
+    border: 1px solid rgb(100 31 42 / 0.35);
     color: var(--color-maroon);
     background: transparent;
   }
   .btn-secondary:hover {
-    background: rgb(212 185 122 / 0.18);
+    background: rgb(100 31 42 / 0.05);
     border-color: var(--color-maroon);
+  }
+  /* Light button for burgundy backgrounds. */
+  .btn-light {
+    background: var(--color-cream);
+    color: var(--color-maroon);
+  }
+  .btn-light:hover {
+    background: #fff;
+  }
+  .btn-outline-light {
+    border: 1px solid rgb(248 244 238 / 0.45);
+    color: var(--color-cream);
+  }
+  .btn-outline-light:hover {
+    border-color: var(--color-cream);
+    background: rgb(248 244 238 / 0.08);
   }
   .card {
     background: #fff;
-    border-radius: 1.25rem;
+    border: 1px solid rgb(53 31 37 / 0.07);
+    border-radius: 0.75rem;
     box-shadow: var(--shadow-soft);
   }
   .field {
     width: 100%;
-    min-height: 2.75rem;
-    border-radius: 0.75rem;
-    border: 1px solid rgb(43 26 29 / 0.2);
+    min-height: 2.875rem;
+    border-radius: 0.375rem;
+    border: 1px solid rgb(45 37 35 / 0.2);
     background: #fff;
     padding: 0.625rem 0.875rem;
     font-size: 1rem; /* 16px stops iOS zooming into inputs */
     color: var(--color-ink);
+    transition: border-color 150ms, box-shadow 150ms;
   }
   .field:focus {
     outline: none;
     border-color: var(--color-maroon);
-    box-shadow: 0 0 0 3px rgb(107 26 42 / 0.15);
+    box-shadow: 0 0 0 3px rgb(100 31 42 / 0.14);
   }
   .field[aria-invalid="true"] {
     border-color: #b42318;
@@ -109,8 +142,35 @@
     display: block;
     margin-bottom: 0.375rem;
     font-size: 0.8125rem;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--color-ink);
+  }
+  /* Thin gold rule used under eyebrows and between sections. */
+  .rule {
+    display: block;
+    height: 1px;
+    width: 3rem;
+    background: var(--color-gold);
+  }
+  /* Filter chips above the hamper grid. */
+  .chip {
+    min-height: 2.5rem;
+    padding: 0.5rem 1.1rem;
+    border-radius: 9999px;
+    border: 1px solid rgb(53 31 37 / 0.16);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--color-ink);
+    transition: background-color 200ms, color 200ms, border-color 200ms;
+  }
+  .chip:hover {
+    border-color: var(--color-maroon);
+  }
+  .chip[aria-pressed="true"] {
+    background: var(--color-maroon);
+    border-color: var(--color-maroon);
+    color: #fff;
   }
 }
 
@@ -122,10 +182,42 @@
   0%, 60%, 100% { opacity: 0.25; transform: translateY(0); }
   30% { opacity: 1; transform: translateY(-2px); }
 }
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
 .animate-bubble { animation: bubble-in 320ms ease-out both; }
 .animate-typing { animation: typing 1s infinite; }
+/* Page-load entrance (hero). */
+.animate-fade-up { animation: fade-up 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+/* Cards re-entering after a filter change. */
+.animate-card-in { animation: fade-up 420ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards; }
+
+/* Soft reveal on scroll. No JavaScript; browsers without scroll-driven animations just show the content. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: fade-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 30%;
+    }
+  }
+}
+
+/* Modal entrance. */
+dialog.modal[open] {
+  animation: fade-up 280ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+dialog.modal[open]::backdrop {
+  animation: backdrop-in 280ms ease-out;
+}
+@keyframes backdrop-in {
+  from { opacity: 0; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .animate-bubble, .animate-typing { animation: none; }
+  .animate-bubble, .animate-typing, .animate-fade-up, .animate-card-in,
+  dialog.modal[open], dialog.modal[open]::backdrop { animation: none; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; }
 }

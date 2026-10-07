@@ -75,3 +75,51 @@ export function BowIcon({ className }: IconProps) {
     </svg>
   );
 }
+
+export function ArrowRightIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M4 12h15M13 6l6 6-6 6" />
+    </svg>
+  );
+}
+
+/** Ribbon-tied box, for "Beautifully wrapped". */
+export function RibbonIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <rect x="3.5" y="9" width="17" height="11.5" rx="1" />
+      <path d="M12 9v11.5M3.5 13h17" />
+      <path d="M12 9c-1.5-3.5-5.5-5-6-2.5S9.5 9 12 9Zm0 0c1.5-3.5 5.5-5 6-2.5S14.5 9 12 9Z" />
+    </svg>
+  );
+}
+
+/** Folded card with a pen line, for "Personalised cards". */
+export function CardIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M3.5 6.5h17v12h-17z" />
+      <path d="m3.5 6.5 8.5 6.5 8.5-6.5" />
+    </svg>
+  );
+}
+
+/** Thin outline delivery van, matching the other line icons. */
+export function DeliveryIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M2.5 6.5h11v9.5h-11zM13.5 10h4l3.5 3.5V16h-7.5" />
+      <circle cx="6.5" cy="17.5" r="1.75" />
+      <circle cx="17" cy="17.5" r="1.75" />
+    </svg>
+  );
+}
+
+export function ChatIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M4 18.5 5.2 15A7.5 7.5 0 1 1 8.6 18Z" />
+    </svg>
+  );
+}

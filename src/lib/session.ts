@@ -1,12 +1,21 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import type { DayMonth } from "./dates";
+
+/** Birthdays saved at sign-in so we can remind the customer. Day + month only. */
+export type Birthdays = { self: DayMonth; wife: DayMonth; mother: DayMonth };
 
 /**
  * Demo sign-in. The "account" is the customer's WhatsApp number, kept in this browser.
  * In the live version this would be a real login confirmed with a WhatsApp code.
  */
-export type Session = { name: string; phone: string };
+export type Session = {
+  name: string;
+  phone: string;
+  /** Missing for sessions saved before birthdays were collected. */
+  birthdays?: Birthdays;
+};
 
 const STORAGE_KEY = "qsh:session:v1";
 

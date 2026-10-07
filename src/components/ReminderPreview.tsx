@@ -193,7 +193,7 @@ function AvatarLogo() {
   const [failed, setFailed] = useState(false);
   return (
     <span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-cream text-maroon">
-      {failed ? (
+      {failed || !business.logo ? (
         <GiftIcon className="h-6 w-6" />
       ) : (
         // eslint-disable-next-line @next/next/no-img-element

@@ -36,12 +36,25 @@ export function formatPrice(price: number): string {
   return `${business.currency} ${price.toLocaleString("en-US")}`;
 }
 
+/** Pre-filled order message with the details we need, for the customer to fill in. */
 export function orderMessage(hamper: Hamper): string {
-  return `Hi, I'd like to order the ${hamper.name} (${business.currency} ${hamper.price})`;
+  return [
+    `Hello ${business.name}! I'd like to order the ${hamper.name} for ${formatPrice(hamper.price)}.`,
+    "",
+    "Delivery date:",
+    "Delivery area:",
+    "Recipient name:",
+    "Card message:",
+  ].join("\n");
 }
 
 export function orderLink(hamper: Hamper): string {
   return waLink(business.whatsappNumber, orderMessage(hamper));
+}
+
+/** General enquiry, for "Order on WhatsApp" buttons that are not tied to one hamper. */
+export function chatLink(text = `Hello ${business.name}! I'd like help choosing a surprise hamper.`): string {
+  return waLink(business.whatsappNumber, text);
 }
 
 export function occasionLabel(o: Pick<Occasion, "occasionType" | "occasionOther">): string {

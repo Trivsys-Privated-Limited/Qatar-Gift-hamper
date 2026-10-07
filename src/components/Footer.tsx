@@ -1,45 +1,58 @@
 import Link from "next/link";
 import { business } from "@/config/business";
-import { formatPhone, waLink } from "@/lib/whatsapp";
+import { chatLink, formatPhone } from "@/lib/whatsapp";
 import { Logo } from "./Logo";
 import { WhatsAppIcon } from "./Icons";
 
+const LINKS = [
+  { href: "/#hampers", label: "Hampers" },
+  { href: "/#how-it-works", label: "How It Works" },
+  { href: "/never-miss-a-moment", label: "Never Miss a Moment" },
+  { href: "/dashboard", label: "Owner dashboard (demo)" },
+];
+
 export function Footer() {
   return (
-    <footer className="mt-16 border-t border-gold/60 bg-cream">
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-3 md:px-6">
+    <footer className="border-t border-gold/40 bg-sand">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-[1.4fr_1fr_1fr] md:px-6">
         <div>
-          <Logo className="h-16 md:h-20" />
-          <p className="mt-3 max-w-xs text-sm text-ink/75">
-            Surprise gift hampers, beautifully wrapped and delivered across {business.city}.
+          <Logo className="h-14" />
+          <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">
+            Surprise gift hampers, beautifully wrapped and delivered across {business.city.split(",")[0]}.
           </p>
         </div>
 
-        <div>
+        <nav aria-label="Footer">
           <p className="kicker">Explore</p>
-          <ul className="mt-3 space-y-2 text-sm">
-            <li><Link className="hover:text-maroon" href="/#hampers">Hampers</Link></li>
-            <li><Link className="hover:text-maroon" href="/never-miss-a-moment">Never Miss a Moment</Link></li>
-            <li><Link className="hover:text-maroon" href="/dashboard">Owner dashboard (demo)</Link></li>
+          <ul className="mt-4 space-y-2.5 text-sm">
+            {LINKS.map((l) => (
+              <li key={l.href}>
+                <Link className="text-ink/80 transition-colors hover:text-maroon" href={l.href}>
+                  {l.label}
+                </Link>
+              </li>
+            ))}
           </ul>
-        </div>
+        </nav>
 
         <div>
-          <p className="kicker">Order on WhatsApp</p>
+          <p className="kicker">Contact</p>
           <a
-            href={waLink(business.whatsappNumber, `Hi ${business.name}, I'd like to order a hamper.`)}
+            href={chatLink()}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-maroon hover:underline"
+            className="mt-4 inline-flex items-center gap-2 text-sm text-ink/80 transition-colors hover:text-maroon"
           >
-            <WhatsAppIcon className="h-5 w-5" />
-            {formatPhone(business.whatsappNumber)}
+            <WhatsAppIcon className="h-4 w-4 text-maroon" />
+            <span>
+              WhatsApp <span className="whitespace-nowrap">{formatPhone(business.whatsappNumber)}</span>
+            </span>
           </a>
-          <p className="mt-2 text-sm text-ink/75">{business.city}</p>
+          <p className="mt-2.5 text-sm text-ink/80">{business.city}</p>
         </div>
       </div>
-      <div className="border-t border-gold/40">
-        <p className="mx-auto max-w-6xl px-4 py-4 text-xs text-ink/60 md:px-6">
+      <div className="border-t border-ink/10">
+        <p className="mx-auto max-w-6xl px-4 py-5 text-xs tracking-wide text-muted md:px-6">
           © {new Date().getFullYear()} {business.name}. All rights reserved.
         </p>
       </div>
